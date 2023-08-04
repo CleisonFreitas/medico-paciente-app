@@ -46,6 +46,7 @@ class AuthController extends Controller
                 'authorization' => [
                     'token' => $token,
                     'type' => 'bearer',
+                    'expires_in' => Auth::factory()->getTTL() * 60,
                 ]
             ]);
 
@@ -72,6 +73,7 @@ class AuthController extends Controller
             'authorization' => [
                 'token' => $token,
                 'type' => 'bearer',
+                'expires_in' => Auth::factory()->getTTL() * 60,
             ]
         ]);
     }
@@ -93,6 +95,7 @@ class AuthController extends Controller
             'authorization' => [
                 'token' => Auth::refresh(),
                 'type' => 'bearer',
+                'expires_in' => Auth::factory()->getTTL() * 60,
             ]
         ]);
     }
