@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace App\Classes\Repositories;
 
-use App\Classes\Contracts\ListCidadeContract;
-use App\Http\Resources\CidadeResource;
-use App\Models\Cidade\Cidade;
+use App\Classes\Contracts\ListMedicoContract;
+use App\Http\Resources\MedicoResource;
+use App\Models\Medico\Medico;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ListCidadeRepository implements ListCidadeContract
+class ListMedicoRepository implements ListMedicoContract
 {
     /**
      * @return \Illuminate\Http\Resources\Json\JsonResource;
      */
     public function index(): JsonResource
     {
-        return CidadeResource::collection(Cidade::all());
+        return MedicoResource::collection(Medico::all());
     }
 }

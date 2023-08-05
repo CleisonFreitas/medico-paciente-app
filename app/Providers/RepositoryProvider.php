@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Classes\Contracts\ListCidadeContract;
+use App\Classes\Contracts\ListMedicoContract;
 use App\Classes\Repositories\ListCidadeRepository;
+use App\Classes\Repositories\ListMedicoRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryProvider extends ServiceProvider
@@ -14,6 +16,7 @@ class RepositoryProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(ListCidadeContract::class, ListCidadeRepository::class);
+        $this->app->bind(ListMedicoContract::class, ListMedicoRepository::class);
     }
 
     /**
