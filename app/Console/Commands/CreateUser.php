@@ -6,7 +6,6 @@ use App\Models\User;
 use Faker\Factory;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 class CreateUser extends Command
 {
@@ -37,7 +36,7 @@ class CreateUser extends Command
         User::create([
             'name' => $name,
             'email' => $email,
-            'password' => Hash::make($password)
+            'password' => Hash::make($password),
         ]);
 
         $this->info("success! the new user $email and password $password has been created!");

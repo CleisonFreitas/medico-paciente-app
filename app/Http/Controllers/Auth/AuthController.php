@@ -7,9 +7,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Tymon\JWTAuth\Exceptions\JWTException;
-use Tymon\JWTAuth\Exceptions\TokenExpiredException;
-use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
@@ -20,7 +17,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login','register']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register']]);
     }
 
     public function login(Request $request)
@@ -32,7 +29,7 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         $token = Auth::attempt($credentials);
-        if (!$token) {
+        if (! $token) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Unauthorized',
@@ -40,19 +37,21 @@ class AuthController extends Controller
         }
 
         $user = Auth::user();
+
         return response()->json([
-                'status' => 'success',
-                'user' => $user,
-                'authorization' => [
-                    'token' => $token,
-                    'type' => 'bearer',
-                    'expires_in' => Auth::factory()->getTTL() * 60,
-                ]
-            ]);
+            'status' => 'success',
+            'user' => $user,
+            'authorization' => [
+                'token' => $token,
+                'type' => 'bearer',
+                'expires_in' => Auth::factory()->getTTL() * 60,
+            ],
+        ]);
 
     }
 
-    public function register(Request $request){
+    public function register(Request $request)
+    {
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -66,6 +65,7 @@ class AuthController extends Controller
         ]);
 
         $token = Auth::login($user);
+
         return response()->json([
             'status' => 'success',
             'message' => 'User created successfully',
@@ -74,13 +74,14 @@ class AuthController extends Controller
                 'token' => $token,
                 'type' => 'bearer',
                 'expires_in' => Auth::factory()->getTTL() * 60,
-            ]
+            ],
         ]);
     }
 
     public function logout()
     {
         Auth::logout();
+
         return response()->json([
             'status' => 'success',
             'message' => 'Successfully logged out',
@@ -96,7 +97,7 @@ class AuthController extends Controller
                 'token' => Auth::refresh(),
                 'type' => 'bearer',
                 'expires_in' => Auth::factory()->getTTL() * 60,
-            ]
+            ],
         ]);
     }
 }

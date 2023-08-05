@@ -19,12 +19,13 @@ class VerifyJwt
     {
         try {
             $user = JWTAuth::parseToken()->authenticate();
-            if (!$user) {
+            if (! $user) {
                 return response()->json(['errors' => ['message' => 'user not found']], 500);
             }
         } catch (JWTException $e) {
             return response()->json(['errors' => ['message' => $e->getMessage()]], 500);
         }
+
         return $next($request);
     }
 }

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('cidades', function (Blueprint $table) {
             $table->id()->comment('Identificador único da tabela cidades');
-            $table->string('nome',100)->comment('Nome da cidade');
-            $table->string('estado',100)->comment('Nome do estado');
+            $table->string('nome', 100)->comment('Nome da cidade');
+            $table->string('estado', 100)->comment('Nome do estado');
             $table->timestamps();
             $table->softDeletes()->comment('Data de exclusão da cidade');
         });

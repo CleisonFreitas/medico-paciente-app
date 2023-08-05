@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('paciente', function (Blueprint $table) {
             $table->id()->comment('Identificador único da tabela paciente');
-            $table->string('nome',100)->comment('Nome do paciente');
-            $table->string('cpf',20)->comment('Nº do cpf do paciente');
-            $table->string('celular',20)->comment('Número de contato do paciente');
+            $table->string('nome', 100)->comment('Nome do paciente');
+            $table->string('cpf', 20)->comment('Nº do cpf do paciente');
+            $table->string('celular', 20)->comment('Número de contato do paciente');
             $table->timestamps();
             $table->softDeletes('Data de remoção do paciente');
         });

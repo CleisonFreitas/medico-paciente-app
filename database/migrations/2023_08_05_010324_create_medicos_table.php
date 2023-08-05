@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('medico', function (Blueprint $table) {
             $table->id()->comment('Identificador único da tabela medico');
-            $table->string('nome',100)->comment('Nome do médico');
-            $table->string('especialidade',100)->comment('Especialidade do médico');
+            $table->string('nome', 100)->comment('Nome do médico');
+            $table->string('especialidade', 100)->comment('Especialidade do médico');
             $table->unsignedBigInteger('cidade_id')->comment('Identificador único da tabela cidades');
             $table->timestamps();
             $table->softDeletes()->comment('Data de remoção do médico');

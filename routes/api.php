@@ -21,21 +21,24 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::group([
     'middleware' => 'api',
-    'prefix' => 'auth'
-],  function() {
-    Route::controller(AuthController::class)->group(function() {
-        Route::post('login',  'login');
+    'prefix' => 'auth',
+], function () {
+    Route::controller(AuthController::class)->group(function () {
+        Route::post('login', 'login');
         Route::post('logout', 'logout');
-        Route::post('refresh','refresh');
+        Route::post('refresh', 'refresh');
         Route::post('me', 'me');
     });
-    
+
 }
 
 );
 
 Route::middleware('jwt.verify')->group(function () {
-    Route::get('/test', function() {
+    Route::get('/test', function () {
         return response()->json(['success!' => 'Welcome to the test zone!'], 200);
     });
 });
+
+/* Public endpoints */
+require __DIR__.'/public.php';
