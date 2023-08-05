@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Medico\MedicoStoreController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -38,6 +39,9 @@ Route::middleware('jwt.verify')->group(function () {
     Route::get('/test', function () {
         return response()->json(['success!' => 'Welcome to the test zone!'], 200);
     });
+
+    /* Medicos */
+    Route::post('medicos', [MedicoStoreController::class, 'create']);
 });
 
 /* Public endpoints */
