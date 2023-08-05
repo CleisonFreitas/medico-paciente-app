@@ -24,7 +24,7 @@ class Medico extends Model
     /**
      * @return Illuminate\Database\Eloquent\Relations\BelongsTo;
      */
-    public function cidades(): BelongsTo
+    public function cidade(): BelongsTo
     {
         return $this->belongsTo(Cidade::class, 'cidade_id');
     }

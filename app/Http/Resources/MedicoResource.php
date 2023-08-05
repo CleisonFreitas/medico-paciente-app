@@ -20,6 +20,7 @@ class MedicoResource extends JsonResource
             'especialidade' => $this->especialidade,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'cidade' => new CidadeResource($this->cidade),
         ];
     }
 }
