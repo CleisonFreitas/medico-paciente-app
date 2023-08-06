@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('cpf', 20)->comment('Nº do cpf do paciente');
             $table->string('celular', 20)->comment('Número de contato do paciente');
             $table->timestamps();
-            $table->softDeletes('Data de remoção do paciente');
+            $table->softDeletes()->comment('Data de remoção do paciente');
         });
     }
 

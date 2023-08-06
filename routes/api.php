@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Medico\MedicoStoreController;
+use App\Http\Controllers\Paciente\StorePacienteController;
+use App\Http\Controllers\Paciente\UpdatePacienteController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -42,6 +44,10 @@ Route::middleware('jwt.verify')->group(function () {
 
     /* Medicos */
     Route::post('medicos', [MedicoStoreController::class, 'create']);
+
+    /* Pacientes */
+    Route::post('pacientes', [StorePacienteController::class, 'create']);
+    Route::put('pacientes/{id_paciente}', [UpdatePacienteController::class, 'update']);
 });
 
 /* Public endpoints */
