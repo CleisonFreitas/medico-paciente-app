@@ -6,6 +6,7 @@ use App\Http\Controllers\Medico\MedicoPacienteController;
 use App\Http\Controllers\Medico\MedicoStoreController;
 use App\Http\Controllers\Paciente\StorePacienteController;
 use App\Http\Controllers\Paciente\UpdatePacienteController;
+use App\Http\Controllers\User\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,13 +27,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::group([
     'middleware' => 'api',
-    'prefix' => 'auth',
 ], function () {
     Route::controller(AuthController::class)->group(function () {
         Route::post('login', 'login');
-        Route::post('logout', 'logout');
-        Route::post('refresh', 'refresh');
-        Route::post('me', 'me');
     });
 
 }
@@ -52,6 +49,9 @@ Route::middleware('jwt.verify')->group(function () {
     /* Pacientes */
     Route::post('pacientes', [StorePacienteController::class, 'create']);
     Route::put('pacientes/{id_paciente}', [UpdatePacienteController::class, 'update']);
+
+    /* Users */
+    Route::get('users', [UserController::class, 'index']);
 });
 
 /* Public endpoints */
