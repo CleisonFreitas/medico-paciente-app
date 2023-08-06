@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Medico\ListMedicoPacienteController;
+use App\Http\Controllers\Medico\MedicoPacienteController;
 use App\Http\Controllers\Medico\MedicoStoreController;
 use App\Http\Controllers\Paciente\StorePacienteController;
 use App\Http\Controllers\Paciente\UpdatePacienteController;
@@ -44,6 +46,8 @@ Route::middleware('jwt.verify')->group(function () {
 
     /* Medicos */
     Route::post('medicos', [MedicoStoreController::class, 'create']);
+    Route::post('medicos/{id_medico}/pacientes', [MedicoPacienteController::class, 'sync']);
+    Route::get('medicos/{id_medico}/pacientes', [ListMedicoPacienteController::class, 'list']);
 
     /* Pacientes */
     Route::post('pacientes', [StorePacienteController::class, 'create']);

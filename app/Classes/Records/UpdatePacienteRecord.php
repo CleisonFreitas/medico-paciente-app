@@ -6,7 +6,7 @@ namespace App\Classes\Records;
 
 use App\Models\Paciente\Paciente;
 
-class PacienteRecord extends SaveRecords
+class UpdatePacienteRecord extends SaveRecords
 {
     /**
      * @param  Paciente  $paciente;
@@ -15,7 +15,6 @@ class PacienteRecord extends SaveRecords
     public function execute(Paciente $paciente, object $pacienteObject)
     {
         $paciente->nome = $pacienteObject->getNome();
-        $paciente->cpf = $pacienteObject->getCpf();
         $paciente->celular = $pacienteObject->getCelular();
 
         return $this->handler($paciente);

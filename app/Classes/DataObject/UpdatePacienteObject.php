@@ -4,23 +4,19 @@ declare(strict_types=1);
 
 namespace App\Classes\DataObject;
 
-class PacienteObject
+class UpdatePacienteObject
 {
     private String $nome;
-
-    private String $cpf;
 
     private String $celular;
 
     /**
      * @param  string  $nome;
-     * @param  string  $cpf;
      * @param  string  $celular;
      */
-    public function __construct(string $nome, string $cpf, string $celular)
+    public function __construct(string $nome, string $celular)
     {
         $this->nome = $nome;
-        $this->cpf = $cpf;
         $this->celular = $celular;
     }
 
@@ -30,14 +26,6 @@ class PacienteObject
     public function getNome()
     {
         return $this->nome;
-    }
-
-    /**
-     * @return String;
-     */
-    public function getCpf()
-    {
-        return $this->cpf;
     }
 
     /**
