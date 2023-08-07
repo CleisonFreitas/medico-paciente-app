@@ -19,8 +19,8 @@ class SyncMedicoPacienteRepository implements SyncMedicoPacienteContract
      */
     public function sync(array $data): JsonResource
     {
-        $medico = Medico::find($data['id_medico']);
-        $paciente = Paciente::find($data['id_paciente']);
+        $medico = Medico::find($data['medico_id']);
+        $paciente = Paciente::find($data['paciente_id']);
 
         $medico->pacientes()->syncWithoutDetaching($paciente->id);
 
