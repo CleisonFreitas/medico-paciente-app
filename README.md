@@ -18,6 +18,7 @@ O objetivo desta API é listar médicos e seus pacientes, divididos por cidade. 
 3. Inicie os containers usando:
 
     ```bash
+    // Por padrão, a aplicação irá funcionar na porta 80, porém é possível alterar a porta padrão no arquivo .env, em APP_PORT. Ex: APP_PORT=8011
     ./vendor/bin/sail up
 
 
@@ -107,4 +108,35 @@ Todas as rotas abaixo são públicas, ou seja, não exigem autenticação:
 - Requisição GET para dominio/api/cidades/{id_cidade}/medicos: retorna todos os médicos de uma cidade específica.
 
 
-Rotas que exigem 
+Rotas que exigem autenticação:
+
+- Requisição POST para dominio/api/medicos: retorna os dados do médico cadastrado.
+
+    ```bash
+    Request:
+    {
+        "nome": "string",
+        "especialidade": "string",
+        "cidade_id": "int"
+    };
+
+    ```bash
+    Response:
+    {
+        "data": {
+            "id": 3,
+            "nome": "Dr. Gustávo Lazaro",
+            "especialidade": "Cirurgião",
+            "created_at": "2023-08-07T02:18:46.000000Z",
+            "updated_at": "2023-08-07T02:18:46.000000Z",
+            "cidade": {
+                "id": 1,
+                "nome": "North Codystad",
+                "estado": "Colorado",
+                "created_at": "2023-08-07T01:34:34.000000Z",
+                "updated_at": "2023-08-07T01:34:34.000000Z"
+            }
+        }
+    }
+
+
