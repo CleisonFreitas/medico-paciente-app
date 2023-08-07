@@ -18,7 +18,7 @@ use OpenApi\Annotations as OA;
  * )
  * @OA\Server(
  *      description="Ambiente de Desenvolvimento",
- *      url="http://localhost:8000/api/"
+ *      url="http://localhost/api/"
  * ),
  * @OA\Get(
  *     path="/test",
