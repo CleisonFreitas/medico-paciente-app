@@ -1,0 +1,184 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API medico-paciente-app",
+        "description": "O objetivo desta API é listar médicos e seus pacientes, divididos por cidade.",
+        "contact": {
+            "email": "cleison.npi@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000/api/",
+            "description": "Ambiente de Desenvolvimento"
+        }
+    ],
+    "paths": {
+        "/cidades/{id_cidade}/medicos": {
+            "get": {
+                "tags": [
+                    "cidades/médicos"
+                ],
+                "summary": "Lista todos os médicos cadastrados de uma cidade",
+                "operationId": "74d91fd92e5a69fedf865fabb990fd89",
+                "parameters": [
+                    {
+                        "name": "id_cidade",
+                        "in": "path",
+                        "description": "ID da cidade",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retorna a lista de todos os médicos cadastrados",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CidadeMedico"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno no servidor"
+                    }
+                }
+            }
+        },
+        "/test": {
+            "get": {
+                "description": "Área de teste",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "description": "Bearer token para autenticação",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Teste de validação"
+                    }
+                }
+            }
+        },
+        "/medicos": {
+            "get": {
+                "tags": [
+                    "Médicos"
+                ],
+                "summary": "Lista todos os médicos cadastrados",
+                "operationId": "5964b0312091791b63ad9626efb9377f",
+                "responses": {
+                    "200": {
+                        "description": "Retorna a lista de todos os médicos cadastrados",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Medico"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno no servidor"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "CidadeMedico": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "nome": {
+                        "type": "string",
+                        "example": "Dra. Alessandra Moura"
+                    },
+                    "especialidade": {
+                        "type": "string",
+                        "example": "Neurologista"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "cidade": {
+                        "$ref": "#/components/schemas/Cidade"
+                    }
+                },
+                "type": "object"
+            },
+            "Cidade": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "nome": {
+                        "type": "string",
+                        "example": "North Danykamouth"
+                    },
+                    "estado": {
+                        "type": "string",
+                        "example": "Wyoming"
+                    }
+                },
+                "type": "object"
+            },
+            "Medico": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "nome": {
+                        "type": "string",
+                        "example": "Dra. Alessandra Moura"
+                    },
+                    "especialidade": {
+                        "type": "string",
+                        "example": "Neurologista"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "cidade": {
+                        "$ref": "#/components/schemas/Cidade"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}

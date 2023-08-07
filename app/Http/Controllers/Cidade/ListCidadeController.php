@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Cidade;
 use App\Classes\Contracts\ListCidadeContract;
 use App\Classes\Repositories\ListCidadeRepository;
 use App\Http\Controllers\Controller;
+use OpenApi\Annotations as OA;
 use Illuminate\Http\JsonResponse;
 
 class ListCidadeController extends Controller
@@ -21,6 +22,50 @@ class ListCidadeController extends Controller
         $this->listCidadeRepository = $listCidadeRepository;
     }
 
+    /**
+     * @OA\Get(
+     *     path="/api/cidades",
+     *     summary="Lista todas as cidades cadastradas",
+     *     tags={"Cidades"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Retorna a lista de todas as cidades cadastradas",
+     *         @OA\JsonContent(
+     *             type="array",
+     *             @OA\Items(ref="#/components/schemas/Cidade")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Not Found",
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Erro interno no servidor",
+     *     )
+     * )
+     */
+
+    /**
+     * @OA\Schema(
+     *     schema="Cidade",
+     *     @OA\Property(
+     *         property="id",
+     *         type="integer",
+     *         example=1
+     *     ),
+     *     @OA\Property(
+     *         property="nome",
+     *         type="string",
+     *         example="North Danykamouth"
+     *     ),
+     *     @OA\Property(
+     *         property="estado",
+     *         type="string",
+     *         example="Wyoming"
+     *     )
+     * )
+     */
     public function index(): JsonResponse
     {
         try {

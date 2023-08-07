@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Medico;
 use App\Classes\Contracts\ListMedicoPacienteContract;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
+use OpenApi\Annotations as OA;
 
 class ListMedicoPacienteController extends Controller
 {
