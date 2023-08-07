@@ -193,8 +193,8 @@ Rotas que exigem autenticação:
     ```bash
     Request:
     {
-        "id_medico": Int,
-        "id_paciente": Int
+        "medico_id": Int,
+        "paciente_id": Int
     }
 
 - Requisição GET para dominio/api/medicos/:id_medico/pacientes: retorna os dados dos pacientes vinculados ao médico da requisição.
