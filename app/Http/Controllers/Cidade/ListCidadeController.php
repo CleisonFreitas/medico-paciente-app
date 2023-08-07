@@ -30,8 +30,6 @@ class ListCidadeController extends Controller
                 'data' => $cidades,
             ], 200);
         } catch (\Exception $ex) {
-            dd($ex->getMessage());
-
             return response()->json($ex, 404);
         }
     }
