@@ -17,7 +17,7 @@ class UpdatePacienteController extends Controller
     }
 
     /**
-     * @OA\Post(
+     * @OA\Put(
      *     path="/pacientes/:id_paciente",
      *     summary="Cadastra um novo paciente",
      *     tags={"atualizar pacientes"},

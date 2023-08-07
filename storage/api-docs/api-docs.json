@@ -10,7 +10,7 @@
     },
     "servers": [
         {
-            "url": "http://localhost/api/",
+            "url": "http://localhost:8000/api/",
             "description": "Ambiente de Desenvolvimento"
         }
     ],
@@ -561,12 +561,12 @@
             }
         },
         "/pacientes/:id_paciente": {
-            "post": {
+            "put": {
                 "tags": [
                     "atualizar pacientes"
                 ],
                 "summary": "Cadastra um novo paciente",
-                "operationId": "bcd3ffdef67dc574a3d76ce3e3257b79",
+                "operationId": "12edcbc03ba3c00bd78144aa250c3934",
                 "parameters": [
                     {
                         "name": "token",
