@@ -33,7 +33,7 @@ O objetivo desta API é listar médicos e seus pacientes, divididos por cidade. 
     php artisan migrate
     php artisan db:seed
 
-6.Crie um usuário genérico usando o comando:
+6. Crie um usuário genérico usando o comando:
 
     ```bash
     php artisan app:create-user
