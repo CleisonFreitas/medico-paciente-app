@@ -43,7 +43,16 @@ O objetivo desta API é listar médicos e seus pacientes, divididos por cidade. 
     ./vendor/bin/sail artisan app:create-user NameExample example@example.com minha-senha 
 
 
-# API medico-paciente-app
+# Utilizando a API
+Para fazer a autenticação:
+- Requisição POST para dominio/api/login
+    ```bash
+    Request: {
+        "email": string,
+        "password": string
+    }
+    // Utilizar o token gerado para acessar as urls privadas.
+
 Todas as rotas abaixo são públicas, ou seja, não exigem autenticação:
 
 - Requisição GET para dominio/api/cidades: retorna todas as cidades cadastradas.
@@ -118,9 +127,8 @@ Rotas que exigem autenticação:
         "nome": "string",
         "especialidade": "string",
         "cidade_id": "int"
-    };
+    }
 
-    ```bash
     Response:
     {
         "data": {
@@ -139,4 +147,53 @@ Rotas que exigem autenticação:
         }
     }
 
+- Requisição POST para dominio/api/pacientes: retorna os dados do paciente cadastrado.
 
+    ```bash
+    Request:
+    {
+        "nome": "string",
+        "cpf": "string",
+        "celular": "string"
+    }
+
+    Response:
+    {
+        "data": {
+            "id": 1,
+            "nome": "Matheus Henrique",
+            "cpf": "795.429.941-60",
+            "celular": "(11) 9 8432-5789",
+            "created_at": "2023-08-07T02:31:31.000000Z",
+            "updated_at": "2023-08-07T02:31:31.000000Z"
+        }
+    }
+- Requisição PUT para dominio/api/pacientes/:id_paciente: retorna os dados do paciente atualizado.
+     ```bash
+    Request:
+    {
+        "nome": "string",
+        "celular": "string"
+    }
+
+    Response:
+    {
+        "data": {
+            "id": 1,
+            "nome": "Matheus Henrique",
+            "cpf": "795.429.941-60",
+            "celular": "(11) 9 8432-5789",
+            "created_at": "2023-08-07T02:31:31.000000Z",
+            "updated_at": "2023-08-07T02:31:31.000000Z"
+        }
+    }
+
+- Requisição POST para dominio/api/medicos/:id_medico/pacientes: retorna os dados do medico e do paciente recém vinculados
+    ```bash
+    Request:
+    {
+        "id_medico": Int,
+        "id_paciente": Int
+    }
+
+- Requisição GET para dominio/api/medicos/:id_medico/pacientes: retorna os dados dos pacientes vinculados ao médico da requisição.
