@@ -16,8 +16,47 @@ class UserController extends Controller
     }
 
     /**
-     * @return \Illuminate\Http\JsonResponse;
+     * @OA\Get(
+     *     path="/users",
+     *     summary="Retorna a lista de todos os usuários cadastrados",
+     *     tags={"lista de usuários autenticados"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Lista de usuários cadastrados",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="data", type="array",
+     *                 @OA\Items(
+     *                     @OA\Property(property="id", type="integer", example=1),
+     *                     @OA\Property(property="nome", type="string", example="Prof. Cicero Lind"),
+     *                     @OA\Property(property="email", type="string", example="devonte79@yahoo.com"),
+     *                     @OA\Property(property="created_at", type="string", format="date-time"),
+     *                     @OA\Property(property="updated_at", type="string", format="date-time")
+     *                 )
+     *             )
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="token",
+     *         in="query",
+     *         required=false,
+     *         description="Bearer token para autenticação",
+     *         @OA\Schema(
+     *             type="string",
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized - A autenticação é obrigatória",
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Internal server error",
+     *     )
+     * )
      */
+
     public function index(): JsonResponse
     {
         try {

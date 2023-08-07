@@ -74,13 +74,13 @@
                 }
             }
         },
-        "/cidades/{id_cidade}/medicos": {
+        "/cidades/:id_cidade/medicos": {
             "get": {
                 "tags": [
                     "cidades x médicos"
                 ],
                 "summary": "Lista todos os médicos cadastrados de uma cidade",
-                "operationId": "74d91fd92e5a69fedf865fabb990fd89",
+                "operationId": "6a3e7319f107e6ab5855c8abfedce39e",
                 "parameters": [
                     {
                         "name": "id_cidade",
@@ -287,13 +287,13 @@
                 ]
             }
         },
-        "/medicos/{id_medico}/pacientes": {
+        "/medicos/:id_medico/pacientes": {
             "get": {
                 "tags": [
                     "listar médicos x pacientes"
                 ],
                 "summary": "Lista todos os pacientes vinculados a um médico",
-                "operationId": "f55278c91c448b1497ed831478ef4713",
+                "operationId": "38bc3da44a61e1bc68ae7141a08a996c",
                 "parameters": [
                     {
                         "name": "id_medico",
@@ -373,7 +373,9 @@
                         "bearerAuth": []
                     }
                 ]
-            },
+            }
+        },
+        "/medicos/{id_medico}/pacientes": {
             "post": {
                 "tags": [
                     "vincular médicos x pacientes"
@@ -631,6 +633,79 @@
                                                 }
                                             },
                                             "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized - A autenticação é obrigatória"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/users": {
+            "get": {
+                "tags": [
+                    "lista de usuários autenticados"
+                ],
+                "summary": "Retorna a lista de todos os usuários cadastrados",
+                "operationId": "1ac7a967d2134b8502ddb9f7a2addc4e",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "description": "Bearer token para autenticação",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de usuários cadastrados",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "nome": {
+                                                        "type": "string",
+                                                        "example": "Prof. Cicero Lind"
+                                                    },
+                                                    "email": {
+                                                        "type": "string",
+                                                        "example": "devonte79@yahoo.com"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
                                         }
                                     },
                                     "type": "object"

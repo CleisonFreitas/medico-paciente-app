@@ -18,7 +18,7 @@ class ListMedicoPacienteController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/medicos/{id_medico}/pacientes",
+     *     path="/medicos/:id_medico/pacientes",
      *     summary="Lista todos os pacientes vinculados a um médico",
      *     tags={"listar médicos x pacientes"},
      *     security={{"bearerAuth":{}}},
