@@ -50,7 +50,7 @@ O objetivo desta API é listar médicos e seus pacientes, divididos por cidade. 
     http://localhost/api/documentation
 
     // Caso utilize criptografia
-    http://localhost/api/documentation
+    https://localhost/api/documentation
 
 # Contato
 Email: cleison51@hotmail.com
