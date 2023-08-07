@@ -15,10 +15,69 @@
         }
     ],
     "paths": {
+        "/login": {
+            "post": {
+                "tags": [
+                    "autenticação"
+                ],
+                "summary": "Forneça um login e senha para obter o token de acesso",
+                "operationId": "ec9c379d2a959de66404708dd4a9322d",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "cleison51@hotmail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "your_password_here"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful login",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "user": {
+                                            "$ref": "#/components/schemas/User"
+                                        },
+                                        "authorization": {
+                                            "$ref": "#/components/schemas/Authorization"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized - Invalid credentials"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
         "/cidades/{id_cidade}/medicos": {
             "get": {
                 "tags": [
-                    "cidades/médicos"
+                    "cidades x médicos"
                 ],
                 "summary": "Lista todos os médicos cadastrados de uma cidade",
                 "operationId": "74d91fd92e5a69fedf865fabb990fd89",
@@ -55,6 +114,36 @@
                 }
             }
         },
+        "/api/cidades": {
+            "get": {
+                "tags": [
+                    "listar cidades"
+                ],
+                "summary": "Lista todas as cidades cadastradas",
+                "operationId": "be0268628d1fddc2625206884b2d3f75",
+                "responses": {
+                    "200": {
+                        "description": "Retorna a lista de todas as cidades cadastradas",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Cidade"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Erro interno no servidor"
+                    }
+                }
+            }
+        },
         "/test": {
             "get": {
                 "description": "Área de teste",
@@ -79,7 +168,7 @@
         "/medicos": {
             "get": {
                 "tags": [
-                    "Médicos"
+                    "listar médicos"
                 ],
                 "summary": "Lista todos os médicos cadastrados",
                 "operationId": "5964b0312091791b63ad9626efb9377f",
@@ -101,11 +190,523 @@
                         "description": "Erro interno no servidor"
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "cadastar médicos"
+                ],
+                "summary": "Cadastra um novo médico",
+                "operationId": "0bcbdd4c37d93b8bbc62133e28900944",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "description": "Bearer token para autenticação",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nome": {
+                                        "type": "string",
+                                        "example": "Dra. Alessandra Moura"
+                                    },
+                                    "especialidade": {
+                                        "type": "string",
+                                        "example": "Neurologista"
+                                    },
+                                    "cidade_id": {
+                                        "type": "integer",
+                                        "example": 3
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Novo médico cadastrado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 3
+                                                },
+                                                "nome": {
+                                                    "type": "string",
+                                                    "example": "Dra. Alessandra Moura"
+                                                },
+                                                "especialidade": {
+                                                    "type": "string",
+                                                    "example": "Neurologista"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time"
+                                                },
+                                                "cidade": {
+                                                    "$ref": "#/components/schemas/Cidade"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized - A autenticação é obrigatória"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/medicos/{id_medico}/pacientes": {
+            "get": {
+                "tags": [
+                    "listar médicos x pacientes"
+                ],
+                "summary": "Lista todos os pacientes vinculados a um médico",
+                "operationId": "f55278c91c448b1497ed831478ef4713",
+                "parameters": [
+                    {
+                        "name": "id_medico",
+                        "in": "path",
+                        "description": "ID do médico",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 1
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "description": "Bearer token para autenticação",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retorna a lista de todos os pacientes vinculados ao médico",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "nome": {
+                                                        "type": "string",
+                                                        "example": "Fábio Gonzales"
+                                                    },
+                                                    "cpf": {
+                                                        "type": "string",
+                                                        "example": "795.429.941-60"
+                                                    },
+                                                    "celular": {
+                                                        "type": "string",
+                                                        "example": "(11) 98484-6332"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized - A autenticação é obrigatória"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "vincular médicos x pacientes"
+                ],
+                "summary": "Vincula um paciente a um médico",
+                "operationId": "40b9ceb20eebc0f3bc8a4cd0ed90eadc",
+                "parameters": [
+                    {
+                        "name": "id_medico",
+                        "in": "path",
+                        "description": "ID do médico",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 1
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "description": "Bearer token para autenticação",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "medico_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "paciente_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Paciente vinculado ao médico com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "medico": {
+                                                    "$ref": "#/components/schemas/Medico"
+                                                },
+                                                "paciente": {
+                                                    "$ref": "#/components/schemas/Paciente"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized - A autenticação é obrigatória"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/pacientes": {
+            "post": {
+                "tags": [
+                    "cadastrar pacientes"
+                ],
+                "summary": "Cadastra um novo paciente",
+                "operationId": "ac13e963e79ac9b1bd2ec5252c30a16b",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "description": "Bearer token para autenticação",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nome": {
+                                        "type": "string",
+                                        "example": "Matheus Henrique"
+                                    },
+                                    "cpf": {
+                                        "type": "string",
+                                        "example": "795.429.941-60"
+                                    },
+                                    "celular": {
+                                        "type": "string",
+                                        "example": "(11) 9 8432-5789"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Novo paciente cadastrado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 3
+                                                },
+                                                "nome": {
+                                                    "type": "string",
+                                                    "example": "Matheus Henrique"
+                                                },
+                                                "cpf": {
+                                                    "type": "string",
+                                                    "example": "795.429.941-60"
+                                                },
+                                                "celular": {
+                                                    "type": "string",
+                                                    "example": "(11) 9 8432-5789"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized - A autenticação é obrigatória"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/pacientes/:id_paciente": {
+            "post": {
+                "tags": [
+                    "atualizar pacientes"
+                ],
+                "summary": "Cadastra um novo paciente",
+                "operationId": "bcd3ffdef67dc574a3d76ce3e3257b79",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "description": "Bearer token para autenticação",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nome": {
+                                        "type": "string",
+                                        "example": "Matheus Henrique"
+                                    },
+                                    "celular": {
+                                        "type": "string",
+                                        "example": "(11) 9 8432-5789"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "paciente atualizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 3
+                                                },
+                                                "nome": {
+                                                    "type": "string",
+                                                    "example": "Matheus Henrique"
+                                                },
+                                                "cpf": {
+                                                    "type": "string",
+                                                    "example": "795.429.941-60"
+                                                },
+                                                "celular": {
+                                                    "type": "string",
+                                                    "example": "(11) 9 8432-5789"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized - A autenticação é obrigatória"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         }
     },
     "components": {
         "schemas": {
+            "User": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 3
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "cleison"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "cleison51@hotmail.com"
+                    },
+                    "email_verified_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "deleted_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "Authorization": {
+                "properties": {
+                    "token": {
+                        "type": "string",
+                        "example": "your_access_token_here"
+                    },
+                    "type": {
+                        "type": "string",
+                        "example": "bearer"
+                    },
+                    "expires_in": {
+                        "type": "integer",
+                        "example": 3600
+                    }
+                },
+                "type": "object"
+            },
             "CidadeMedico": {
                 "properties": {
                     "id": {
@@ -178,6 +779,47 @@
                     }
                 },
                 "type": "object"
+            },
+            "Paciente": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "nome": {
+                        "type": "string",
+                        "example": "Fábio Gonzales"
+                    },
+                    "cpf": {
+                        "type": "string",
+                        "example": "795.429.941-60"
+                    },
+                    "celular": {
+                        "type": "string",
+                        "example": "(11) 98484-6332"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "deleted_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
             }
         }
     }

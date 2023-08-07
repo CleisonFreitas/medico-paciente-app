@@ -17,9 +17,9 @@ class CidadeMedicoController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/cidades/{id_cidade}/medicos",
+     *     path="/cidades/:id_cidade/medicos",
      *     summary="Lista todos os médicos cadastrados de uma cidade",
-     *     tags={"cidades/médicos"},
+     *     tags={"cidades x médicos"},
      *     @OA\Parameter(
      *         name="id_cidade",
      *         in="path",

@@ -17,9 +17,54 @@ class MedicoStoreController extends Controller
     }
 
     /**
-     * @param  \Illuminate\Http\Request  $request;
-     * @return JsonResponse;
+     * @OA\Post(
+     *     path="/medicos",
+     *     summary="Cadastra um novo médico",
+     *     tags={"cadastar médicos"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             @OA\Property(property="nome", type="string", example="Dra. Alessandra Moura"),
+     *             @OA\Property(property="especialidade", type="string", example="Neurologista"),
+     *             @OA\Property(property="cidade_id", type="integer", example=3)
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="token",
+     *         in="query",
+     *         required=false,
+     *         description="Bearer token para autenticação",
+     *         @OA\Schema(
+     *             type="string",
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Novo médico cadastrado com sucesso",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="data", type="object",
+     *                 @OA\Property(property="id", type="integer", example=3),
+     *                 @OA\Property(property="nome", type="string", example="Dra. Alessandra Moura"),
+     *                 @OA\Property(property="especialidade", type="string", example="Neurologista"),
+     *                 @OA\Property(property="created_at", type="string", format="date-time"),
+     *                 @OA\Property(property="updated_at", type="string", format="date-time"),
+     *                 @OA\Property(property="cidade", ref="#/components/schemas/Cidade")
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized - A autenticação é obrigatória",
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Internal server error",
+     *     )
+     * )
      */
+
     public function create(Request $request): JsonResponse
     {
         try {

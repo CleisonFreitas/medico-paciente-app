@@ -26,7 +26,7 @@ class ListCidadeController extends Controller
      * @OA\Get(
      *     path="/api/cidades",
      *     summary="Lista todas as cidades cadastradas",
-     *     tags={"Cidades"},
+     *     tags={"listar cidades"},
      *     @OA\Response(
      *         response=200,
      *         description="Retorna a lista de todas as cidades cadastradas",
@@ -44,9 +44,6 @@ class ListCidadeController extends Controller
      *         description="Erro interno no servidor",
      *     )
      * )
-     */
-
-    /**
      * @OA\Schema(
      *     schema="Cidade",
      *     @OA\Property(

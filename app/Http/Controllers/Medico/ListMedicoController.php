@@ -22,7 +22,7 @@ class ListMedicoController extends Controller
      * @OA\Get(
      *     path="/medicos",
      *     summary="Lista todos os médicos cadastrados",
-     *     tags={"Médicos"},
+     *     tags={"listar médicos"},
      *     @OA\Response(
      *         response=200,
      *         description="Retorna a lista de todos os médicos cadastrados",
