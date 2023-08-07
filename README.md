@@ -38,7 +38,8 @@ O objetivo desta API é listar médicos e seus pacientes, divididos por cidade. 
     ```bash
     php artisan app:create-user
             ou
-    php artisan app:create-user NameExample example@example.com minha-senha //Para atribuir usuário,email e senha específicos
+    //Para atribuir usuário,email e senha específicos
+    php artisan app:create-user NameExample example@example.com minha-senha 
 
 
 # API medico-paciente-app
