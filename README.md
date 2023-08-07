@@ -34,7 +34,7 @@ O objetivo desta API é listar médicos e seus pacientes, divididos por cidade. 
     php artisan migrate
     php artisan db:seed
 
-6. Crie um usuário genérico usando o comando:
+6. Dessa etapa em diante será necessário observar se aplicação já foi devidamente compilada no Docker. Crie um usuário genérico usando o comando:
 
     ```bash
     ./vendor/bin/sail artisan app:create-user
