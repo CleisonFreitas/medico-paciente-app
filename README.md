@@ -22,7 +22,7 @@ O objetivo desta API é listar médicos e seus pacientes, divididos por cidade. 
     ./vendor/bin/sail up
 
 
-4. Execute os seguintes comandos para tornar o projeto funcional:
+4. Abra o projeto em uma nova instância e execute os seguintes comandos para tornar o projeto funcional:
 
     ```bash
     ./vendor/bin/sail artisan key:generate
