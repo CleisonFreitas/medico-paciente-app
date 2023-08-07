@@ -36,10 +36,10 @@ O objetivo desta API é listar médicos e seus pacientes, divididos por cidade. 
 6. Crie um usuário genérico usando o comando:
 
     ```bash
-    php artisan app:create-user
+    ./vendor/bin/sail artisan app:create-user
             ou
     //Para atribuir usuário,email e senha específicos
-    php artisan app:create-user NameExample example@example.com minha-senha 
+    ./vendor/bin/sail artisan app:create-user NameExample example@example.com minha-senha 
 
 
 # API medico-paciente-app
@@ -47,6 +47,64 @@ Todas as rotas abaixo são públicas, ou seja, não exigem autenticação:
 
 - Requisição GET para dominio/api/cidades: retorna todas as cidades cadastradas.
 
+    ```bash
+    {
+        "data": [
+            {
+                "id": 1,
+                "nome": "North Codystad",
+                "estado": "Colorado",
+                "created_at": "2023-08-07T01:34:34.000000Z",
+                "updated_at": "2023-08-07T01:34:34.000000Z"
+            },
+            {
+                "id": 2,
+                "nome": "Watsicaton",
+                "estado": "Illinois",
+                "created_at": "2023-08-07T01:34:34.000000Z",
+                "updated_at": "2023-08-07T01:34:34.000000Z"
+            },
+        ]
+    }
+    
+
 - Requisição GET para dominio/api/medicos: retorna todos os médicos cadastrados.
 
+     ```bash
+    {
+        "data": [
+            {
+                "id": 1,
+                "nome": "Dra. Alessandra Moura",
+                "especialidade": "Neurologista",
+                "created_at": "2023-08-07T02:12:18.000000Z",
+                "updated_at": "2023-08-07T02:12:18.000000Z",
+                "cidade": {
+                    "id": 1,
+                    "nome": "North Codystad",
+                    "estado": "Colorado",
+                    "created_at": "2023-08-07T01:34:34.000000Z",
+                    "updated_at": "2023-08-07T01:34:34.000000Z"
+                }
+            },
+            {
+                "id": 2,
+                "nome": "Dr. Márcio Donato",
+                "especialidade": "Cirurgião",
+                "created_at": "2023-08-07T02:12:45.000000Z",
+                "updated_at": "2023-08-07T02:12:45.000000Z",
+                "cidade": {
+                    "id": 2,
+                    "nome": "Watsicaton",
+                    "estado": "Illinois",
+                    "created_at": "2023-08-07T01:34:34.000000Z",
+                    "updated_at": "2023-08-07T01:34:34.000000Z"
+                }
+            }
+        ]
+    }
+
 - Requisição GET para dominio/api/cidades/{id_cidade}/medicos: retorna todos os médicos de uma cidade específica.
+
+
+Rotas que exigem 
