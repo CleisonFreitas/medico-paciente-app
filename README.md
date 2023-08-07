@@ -53,6 +53,7 @@ Para fazer a autenticação:
     }
     // Utilizar o token gerado para acessar as urls privadas.
 
+- Requisição GET para dominio/api/users: retornará todos os usuários cadastrados // Utilizar token
 Todas as rotas abaixo são públicas, ou seja, não exigem autenticação:
 
 - Requisição GET para dominio/api/cidades: retorna todas as cidades cadastradas.
