@@ -24,7 +24,7 @@ class ListCidadeController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/cidades",
+     *     path="/cidades",
      *     summary="Lista todas as cidades cadastradas",
      *     tags={"listar cidades"},
      *     @OA\Response(
