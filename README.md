@@ -8,7 +8,7 @@ O objetivo desta API é listar médicos e seus pacientes, divididos por cidade. 
 
 1. Clone o projeto em sua máquina local.
 
-2. Execute os seguintes comandos para configurar o ambiente:
+2. Após acessar o ambiente, execute os seguintes comandos para configurar o ambiente:
 
    ```bash
    composer update
