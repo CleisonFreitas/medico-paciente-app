@@ -31,8 +31,8 @@ O objetivo desta API é listar médicos e seus pacientes, divididos por cidade. 
 5. Execute as migrações e seeders para criar a estrutura do banco de dados e a inserção dos dados da cidade:
 
     ```bash
-    php artisan migrate
-    php artisan db:seed
+    ./vendor/bin/sail artisan migrate
+    ./vendor/bin/sail artisan db:seed
 
 6. Dessa etapa em diante será necessário observar se aplicação já foi devidamente compilada no Docker. Crie um usuário genérico usando o comando:
 
