@@ -114,13 +114,13 @@
                 }
             }
         },
-        "/api/cidades": {
+        "/cidades": {
             "get": {
                 "tags": [
                     "listar cidades"
                 ],
                 "summary": "Lista todas as cidades cadastradas",
-                "operationId": "be0268628d1fddc2625206884b2d3f75",
+                "operationId": "a142b01af7067a484e6ae16cf86d0b41",
                 "responses": {
                     "200": {
                         "description": "Retorna a lista de todas as cidades cadastradas",
